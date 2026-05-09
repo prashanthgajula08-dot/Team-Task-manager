@@ -97,6 +97,24 @@ This project is prepared for Railway using a persistent SQLite database file.
 5. Railway will use the `npm start` script and create the SQLite schema automatically on boot.
 6. Set the healthcheck path to `/health`.
 
+## Render deployment
+
+This repo also includes `render.yaml` so you can deploy it as a Render Blueprint.
+
+1. In Render, create a new Blueprint or Web Service from the GitHub repo.
+2. If you use the included `render.yaml`, Render will set:
+   - `NODE_ENV=production`
+   - a generated `JWT_SECRET`
+   - `DATABASE_URL=file:/opt/render/project/src/data/team-task-manager.db`
+   - health check path `/health`
+3. Keep the attached persistent disk mount path at `/opt/render/project/src/data`.
+4. Deploy and open the generated `onrender.com` URL.
+
+Important:
+- Render web services use an ephemeral filesystem by default, so the persistent disk is required for the SQLite database.
+- Render docs say persistent disks are available for paid web services, and only files written under the disk mount path are preserved.
+- If your assignment is checked strictly, submit the Railway deployment because the original requirement says Railway is mandatory.
+
 ## Notes
 
 - SQLite is a valid SQL database and keeps the project easy to run locally.

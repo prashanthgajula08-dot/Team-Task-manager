@@ -1,19 +1,19 @@
 services:
   - type: web
-      name: team-task-manager
-          runtime: node
-              plan: free
-                  buildCommand: npm install
-                      startCommand: npm start
-                          healthCheckPath: /health
-                              autoDeployTrigger: commit
-                                  envVars:
-                                        - key: NODE_ENV
-                                                value: production
-                                                      - key: JWT_SECRET
-                                                              generateValue: true
-                                                                    - key: DATABASE_URL
-                                                                            value: file:./data/team-task-manager.db
-                                                                                  - key: NODE_VERSION
-                                                                                          value: "22.15.0"
-                                                                                          
+    name: team-task-manager
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        value: file:./data/team-task-manager.db
+      - key: NODE_VERSION
+        value: "22.15.0"
+          

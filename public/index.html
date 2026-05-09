@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team Task Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="ambient ambient-one"></div>
+      <div class="ambient ambient-two"></div>
+
+      <main class="app-frame">
+        <section id="status-banner" class="status-banner hidden"></section>
+
+        <section id="auth-view" class="hero-grid">
+          <div class="hero-copy card surface-hero">
+            <p class="eyebrow">Assignment Build</p>
+            <h1>Team Task Manager</h1>
+            <p class="hero-lead">
+              Create projects, assign work, and track overdue tasks with clear
+              roles for admins and members.
+            </p>
+
+            <div class="hero-highlights">
+              <article>
+                <h2>Admin</h2>
+                <p>Creates projects, adds teammates, and assigns tasks.</p>
+              </article>
+              <article>
+                <h2>Member</h2>
+                <p>Focuses on execution and updates the status of assigned work.</p>
+              </article>
+            </div>
+
+            <div class="hero-note">
+              <span>REST APIs</span>
+              <span>Relational DB</span>
+              <span>Railway Ready</span>
+            </div>
+          </div>
+
+          <div class="auth-stack">
+            <section class="card surface-auth">
+              <p class="eyebrow">Welcome Back</p>
+              <h2>Login</h2>
+              <form id="login-form" class="stack-form">
+                <label>
+                  <span>Email</span>
+                  <input type="email" name="email" placeholder="you@example.com" required />
+                </label>
+                <label>
+                  <span>Password</span>
+                  <input type="password" name="password" placeholder="Password" required />
+                </label>
+                <button type="submit" class="primary-button">Login</button>
+              </form>
+            </section>
+
+            <section class="card surface-auth">
+              <p class="eyebrow">New Here</p>
+              <h2>Create Account</h2>
+              <form id="signup-form" class="stack-form">
+                <label>
+                  <span>Full Name</span>
+                  <input type="text" name="name" placeholder="Alex Johnson" required />
+                </label>
+                <label>
+                  <span>Email</span>
+                  <input type="email" name="email" placeholder="alex@example.com" required />
+                </label>
+                <label>
+                  <span>Password</span>
+                  <input type="password" name="password" placeholder="Minimum 6 characters" required />
+                </label>
+                <button type="submit" class="secondary-button">Create Account</button>
+              </form>
+            </section>
+          </div>
+        </section>
+
+        <section id="app-view" class="hidden">
+          <header class="topbar card">
+            <div>
+              <p class="eyebrow">Operations Console</p>
+              <h1>Task Pulse Dashboard</h1>
+            </div>
+            <div class="topbar-actions">
+              <div id="user-chip" class="user-chip"></div>
+              <button id="logout-button" class="ghost-button" type="button">Logout</button>
+            </div>
+          </header>
+
+          <section class="summary-grid" id="summary-cards"></section>
+
+          <section class="feed-grid">
+            <article class="card">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Next 7 Days</p>
+                  <h2>Due Soon</h2>
+                </div>
+              </div>
+              <div id="due-soon-list" class="task-feed"></div>
+            </article>
+
+            <article class="card">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Needs Attention</p>
+                  <h2>Overdue Tasks</h2>
+                </div>
+              </div>
+              <div id="overdue-list" class="task-feed"></div>
+            </article>
+          </section>
+
+          <section class="workspace-grid">
+            <aside class="card workspace-column">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Portfolio</p>
+                  <h2>Projects</h2>
+                </div>
+              </div>
+
+              <form id="create-project-form" class="stack-form compact-form">
+                <label>
+                  <span>Project Name</span>
+                  <input type="text" name="name" placeholder="Website Revamp" required />
+                </label>
+                <label>
+                  <span>Description</span>
+                  <textarea
+                    name="description"
+                    rows="3"
+                    placeholder="Describe the project goals and scope."
+                  ></textarea>
+                </label>
+                <button type="submit" class="primary-button">Create Project</button>
+              </form>
+
+              <div id="project-list" class="project-list"></div>
+            </aside>
+
+            <section class="card workspace-main">
+              <div id="project-shell">
+                <div class="empty-state" id="empty-project-state">
+                  <p class="eyebrow">Start Here</p>
+                  <h2>Select a project</h2>
+                  <p>Create your first project or choose one from the list to manage tasks and teammates.</p>
+                </div>
+
+                <div id="project-content" class="hidden">
+                  <div id="project-header" class="project-header"></div>
+                  <div id="task-list" class="task-board"></div>
+                </div>
+              </div>
+            </section>
+
+            <aside class="card workspace-column">
+              <div class="section-heading">
+                <div>
+                  <p class="eyebrow">Collaboration</p>
+                  <h2>Team & Tasks</h2>
+                </div>
+              </div>
+
+              <div id="project-role-note" class="info-banner"></div>
+
+              <section class="section-block">
+                <h3>Team Members</h3>
+                <div id="member-list" class="member-list"></div>
+              </section>
+
+              <section id="admin-tools" class="hidden">
+                <form id="add-member-form" class="stack-form compact-form section-block">
+                  <h3>Add Team Member</h3>
+                  <label>
+                    <span>User Email</span>
+                    <input type="email" name="email" placeholder="member@example.com" required />
+                  </label>
+                  <label>
+                    <span>Role</span>
+                    <select name="role">
+                      <option value="MEMBER">Member</option>
+                      <option value="ADMIN">Admin</option>
+                    </select>
+                  </label>
+                  <button type="submit" class="secondary-button">Save Member</button>
+                </form>
+
+                <form id="create-task-form" class="stack-form compact-form section-block">
+                  <h3>Create Task</h3>
+                  <label>
+                    <span>Title</span>
+                    <input type="text" name="title" placeholder="Prepare sprint report" required />
+                  </label>
+                  <label>
+                    <span>Description</span>
+                    <textarea
+                      name="description"
+                      rows="4"
+                      placeholder="Add context, deliverables, or notes."
+                    ></textarea>
+                  </label>
+                  <label>
+                    <span>Assign To</span>
+                    <select name="assigneeId" id="task-assignee-select">
+                      <option value="">Unassigned</option>
+                    </select>
+                  </label>
+                  <div class="inline-fields">
+                    <label>
+                      <span>Status</span>
+                      <select name="status">
+                        <option value="TODO">Todo</option>
+                        <option value="IN_PROGRESS">In Progress</option>
+                        <option value="DONE">Done</option>
+                      </select>
+                    </label>
+                    <label>
+                      <span>Priority</span>
+                      <select name="priority">
+                        <option value="LOW">Low</option>
+                        <option value="MEDIUM" selected>Medium</option>
+                        <option value="HIGH">High</option>
+                      </select>
+                    </label>
+                  </div>
+                  <label>
+                    <span>Due Date</span>
+                    <input type="date" name="dueDate" />
+                  </label>
+                  <button type="submit" class="primary-button">Create Task</button>
+                </form>
+              </section>
+            </aside>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js" defer></script>
+  </body>
+</html>

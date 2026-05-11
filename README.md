@@ -37,16 +37,16 @@ A full-stack task management app where teams can create projects, assign work, a
 
 3. The database schema is created automatically on first app start.
 
+   The demo login accounts are also created automatically on app start:
+
+   - Admin: `admin@demo.com` / `password123`
+   - Member: `member@demo.com` / `password123`
+
 4. Optional demo data:
 
    ```bash
    npm run db:seed
    ```
-
-   Demo credentials after seeding:
-
-   - Admin: `admin@demo.com` / `password123`
-   - Member: `member@demo.com` / `password123`
 
 5. Start the app:
 

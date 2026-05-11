@@ -44,12 +44,12 @@ LOCAL SETUP
 
   3. The database schema is created automatically on first app start.
 
-  4. (Optional) Load demo data:
-       npm run db:seed
-
-     Demo credentials after seeding:
+     Demo accounts are also created automatically on app start:
        Admin  : admin@demo.com  / password123
        Member : member@demo.com / password123
+
+  4. (Optional) Load demo data:
+       npm run db:seed
 
   5. Start the development server:
        npm run dev
